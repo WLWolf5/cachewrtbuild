@@ -27,5 +27,7 @@ export function buildBaseConfig() {
 
     const cacheCcache = core.getBooleanInput("ccache");
 
-    return { keyString, paths, cacheToolchain, cacheCcache };
+    const cacheDL = core.getBooleanInput("dl");
+
+    return { keyString, paths, cacheToolchain, cacheCcache, cacheDL };
 }

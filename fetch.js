@@ -16,7 +16,7 @@ try {
             const timestamp = Math.floor(Date.now() / 1000).toString();
             restoreKeys.unshift(keyString);
             keyString += `-${timestamp}`;
-            paths.push(".ccache");
+            paths.push(".ccache", "dl");
         }
 
         if (paths.length > 0) {

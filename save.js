@@ -11,13 +11,17 @@ try {
     } else if (core.getState("CACHE_STATE") === "hit") {
         core.debug("Cache was already restored, skipping save");
     } else {
-        const { keyString: baseKey, paths, cacheCcache } = buildBaseConfig();
+        const { keyString: baseKey, paths, cacheCcache, cacheDL } = buildBaseConfig();
 
         let keyString = baseKey;
         if (cacheCcache) {
             const timestamp = Math.floor(Date.now() / 1000).toString();
             keyString += `-${timestamp}`;
-            paths.push(".ccache");
+            if (cacheDL) {
+                paths.push(".ccache", "dl");
+            } else {
+                paths.push(".ccache");
+            }
         }
 
         if (paths.length > 0) {

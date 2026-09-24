@@ -16,7 +16,7 @@ try {
             const timestamp = Math.floor(Date.now() / 1000).toString();
             restoreKeys.unshift(keyString);
             keyString += `-${timestamp}`;
-            paths.push(".ccache", "dl");
+            paths.push(".ccache");
         }
 
         if (paths.length > 0) {
@@ -31,12 +31,7 @@ try {
                 core.setOutput("hit", "1");
                 if (cacheFetchingResult === keyString) {
                     core.saveState("CACHE_STATE", "hit");
-                }
-
-                if (cacheToolchain && skipBuildingToolchain) {
-                    execSync("sed -i 's/ $(tool.*\\/stamp-compile)//;' Makefile");
-                    execSync("sed -i 's/ $(tool.*\\/stamp-install)//;' Makefile");
-                    core.info("Toolchain building skipped");
+                    execSync('echo "CACHE_HIT=true" >> $GITHUB_ENV')
                 }
             }
         } else {

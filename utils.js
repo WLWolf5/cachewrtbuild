@@ -10,19 +10,16 @@ export function buildBaseConfig() {
     }
 
     const mixkey = core.getInput("mixkey");
-    let keyString = mixkey ? `${mixkey}-cache-openwrt` : "cache-openwrt";
+    let keyString = mixkey ? `${mixkey}-android-kernel` : "unknown-android-kernel";
     const paths = [];
 
     const cacheToolchain = core.getBooleanInput("toolchain");
     if (cacheToolchain) {
-        const toolchainHash = execSync('git log --pretty=tformat:"%h" -n1 tools toolchain')
+        const toolchainHash = execSync('md5sum cache.key | head -c7')
             .toString()
             .trim();
         keyString += `-${toolchainHash}`;
-        paths.push(
-            path.join("staging_dir", "host*"),
-            path.join("staging_dir", "tool*")
-        );
+        paths.push("toolchain");
     }
 
     const cacheCcache = core.getBooleanInput("ccache");

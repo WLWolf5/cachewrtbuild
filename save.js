@@ -17,7 +17,7 @@ try {
         if (cacheCcache) {
             const timestamp = Math.floor(Date.now() / 1000).toString();
             keyString += `-${timestamp}`;
-            paths.push(".ccache", "dl");
+            paths.push(".ccache");
         }
 
         if (paths.length > 0) {

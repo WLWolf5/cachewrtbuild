@@ -31,7 +31,6 @@ try {
                 core.setOutput("hit", "1");
                 if (cacheFetchingResult === keyString) {
                     core.saveState("CACHE_STATE", "hit");
-                    core.setOutput('CACHE_STATE', 'hit');
                 }
             }
         } else {

@@ -15,7 +15,7 @@ export function buildBaseConfig() {
 
     const cacheToolchain = core.getBooleanInput("toolchain");
     if (cacheToolchain) {
-        const toolchainHash = execSync('md5sum cache.key | head -c7')
+        const toolchainHash = execSync('cat cache.key')
             .toString()
             .trim();
         keyString += `-${toolchainHash}`;
